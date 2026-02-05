@@ -53,63 +53,95 @@ export default function Home() {
     )
   }
 
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'LocalServiceHub - Neighborhood Services Directory',
+    description:
+      'A curated list of local service providers including food, homestays, repairs, tuition, and wellness services.',
+    itemListElement: services.slice(0, 50).map((service, index) => ({
+      '@type': 'LocalBusiness',
+      position: index + 1,
+      name: service['Service Provider/Name'],
+      telephone:
+        service['Contact Number'] && service['Contact Number'].toUpperCase() !== 'N/A'
+          ? service['Contact Number']
+          : undefined,
+      areaServed: service['Notes/Location'] || undefined,
+      category: service.Category,
+    })),
+  }
+
   return (
     <main className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-6 max-w-7xl">
-        {/* Header */}
-        <header className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            LocalServiceHub
-          </h1>
-          <p className="text-gray-600">
-            Find local neighborhood services in your area
-          </p>
-        </header>
+        <script
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        {/* Top panel (sticky) */}
+        <div className="sticky top-0 z-20 bg-gray-50 pb-4">
+          {/* Header */}
+          <header className="mb-4">
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              LocalServiceHub
+            </h1>
+            <p className="text-gray-600">
+              Find local neighborhood services in your area
+            </p>
+          </header>
 
-        {/* Search Bar */}
-        <div className="mb-6">
-          <SearchBar value={searchQuery} onChange={setSearchQuery} />
-        </div>
+          {/* Search Bar */}
+          <div className="mb-4">
+            <SearchBar value={searchQuery} onChange={setSearchQuery} />
+          </div>
 
-        {/* Category Filters */}
-        {categories.length > 0 && (
-          <div className="mb-6">
-            <CategoryFilters
-              categories={categories}
-              selectedCategories={selectedCategories}
-              onToggleCategory={toggleCategory}
+          {/* Category Filters */}
+          {categories.length > 0 && (
+            <div className="mb-4">
+              <CategoryFilters
+                categories={categories}
+                selectedCategories={selectedCategories}
+                onToggleCategory={toggleCategory}
+              />
+            </div>
+          )}
+
+          {/* Stats Bar */}
+          <div>
+            <StatsBar
+              visibleCount={filteredServices.length}
+              totalCount={services.length}
             />
           </div>
-        )}
-
-        {/* Stats Bar */}
-        <div className="mb-6">
-          <StatsBar visibleCount={filteredServices.length} totalCount={services.length} />
         </div>
 
         {/* Service Cards Grid */}
-        {filteredServices.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredServices.map((service) => (
-              <ServiceCard key={service.ID} service={service} />
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">
-              No services found matching your criteria.
-            </p>
-            <button
-              onClick={() => {
-                setSearchQuery('')
-                setSelectedCategories([])
-              }}
-              className="mt-4 text-blue-600 hover:text-blue-800 underline"
-            >
-              Clear filters
-            </button>
-          </div>
-        )}
+        <div className="mt-6">
+          {filteredServices.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredServices.map((service) => (
+                <ServiceCard key={service.ID} service={service} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-gray-500 text-lg">
+                No services found matching your criteria.
+              </p>
+              <button
+                onClick={() => {
+                  setSearchQuery('')
+                  setSelectedCategories([])
+                }}
+                className="mt-4 text-blue-600 hover:text-blue-800 underline"
+              >
+                Clear filters
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </main>
   )

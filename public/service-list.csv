@@ -13,9 +13,9 @@ ID,Category,Service Provider/Name,Contact Number,Notes/Location
 12,Appliances,Alex repair tv,019-6204842,
 13,Events/Security,Events Management & Security,012-2559469,
 14,Plumbing,Awe USIM Plumber,012-3381579,
-15,Appliances/Plumb,Che Mad USIM,019-9700690,Plumber & Washing Machine
-16,Appliances/Elec,Zamri Elektrik,017-2303474,Fridge / Washer / Microwave
-17,Education,Cikgu Hanif Tuition English,N/A,Desa Kolej
+15,Appliances/Plumbing,Che Mad USIM,019-9700690,Plumber & Washing Machine
+16,Appliances/Electrical,Zamri Elektrik,017-2303474,Fridge / Washer / Microwave
+17,Education,Cikgu Hanif Tuition English,,Desa Kolej
 18,Auto,Seng Kong tyre auto service,019-2211344,Pendek
 19,Massage,Tukang Urut (Kak Seri),016-6360559,
 20,Massage,Tukang urut lelaki En. Hussin,012-9152713,
@@ -88,7 +88,7 @@ ID,Category,Service Provider/Name,Contact Number,Notes/Location
 92,Cleaning,Pro Bio Hygine services,012-2963578,Home service
 93,Events,Ecah PA System/Karaoke,017-2217085,
 94,Electrical/AC,Along Aircond/Electrical,016-7057161,
-95,Home/Garden,AjiSyam (Tanjor/Recia),011-35791080,Soil/Soap
+95,Home & Garden,AjiSyam (Tanjor/Recia),011-35791080,Soil/Soap
 96,Transport,Amran Lori Sewa,017-3417113,Moving/Disposal
 97,Electrical,Nordin Ahmad Repair,010-8185978,
 98,Construction,Fahim Solution,019-3918700,Zul (010-2205740)
@@ -96,7 +96,7 @@ ID,Category,Service Provider/Name,Contact Number,Notes/Location
 100,Education,Pusat tuisyen KPM,014-3043414,Tmn Semarak
 101,Massage,Kaksu (Urut/Saraf/Strok),013-6386437,
 102,Events,Lizz Naga Kramat PA System,017-3446169,
-103,Cleaning/Trans,Home/Office Cleaning,013-2525613,
+103,Cleaning/Transport,Home/Office Cleaning,013-2525613,
 104,Beauty/Health,SPA RESDUNG NILAI,013-6380494,Tanpa asap
 105,Finance,Beli Emas/Surat Pajak,019-6849065,
 106,Industrial,PolyPaq Sdn Bhd,019-5330860,Packaging/Strapping

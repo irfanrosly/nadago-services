@@ -3,6 +3,7 @@
 import { Phone } from 'lucide-react'
 import { Service } from '../types'
 import { mapToConsolidatedCategory } from '../utils/categoryMapping'
+import { getCategoryIcon } from '../utils/categoryIcons'
 
 interface ServiceCardProps {
   service: Service
@@ -13,12 +14,14 @@ export default function ServiceCard({ service }: ServiceCardProps) {
   const notes = service['Notes/Location']?.trim() || null
   const hasValidPhone = phoneNumber && phoneNumber.toUpperCase() !== 'N/A'
   const consolidatedCategory = mapToConsolidatedCategory(service.Category)
+  const CategoryIcon = getCategoryIcon(consolidatedCategory)
 
   return (
     <div className="bg-white rounded-lg shadow-md p-5 border border-gray-200 hover:shadow-lg transition-shadow">
       <div className="mb-3">
-        <span className="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full">
-          {consolidatedCategory}
+        <span className="inline-flex items-center gap-2 px-3 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full">
+          <CategoryIcon className="w-4 h-4" />
+          <span>{consolidatedCategory}</span>
         </span>
       </div>
       
@@ -44,3 +47,4 @@ export default function ServiceCard({ service }: ServiceCardProps) {
     </div>
   )
 }
+
