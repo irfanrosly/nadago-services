@@ -63,3 +63,62 @@ The application expects a CSV file at `/public/service-list.csv` with the follow
 npm run build
 npm start
 ```
+
+## Deployment to Vercel
+
+This project is configured for automatic deployment to Vercel with CI/CD.
+
+### Automatic CI/CD Setup (Recommended)
+
+1. **Connect to Vercel:**
+   - Go to [vercel.com](https://vercel.com) and sign in
+   - Click "Add New Project"
+   - Import your GitHub repository: `irfanrosly/nadago-services`
+   - Vercel will auto-detect Next.js settings
+
+2. **Configure Project:**
+   - Framework Preset: Next.js (auto-detected)
+   - Root Directory: `./` (default)
+   - Build Command: `npm run build` (auto-detected)
+   - Output Directory: `.next` (auto-detected)
+   - Install Command: `npm install` (auto-detected)
+
+3. **Deploy:**
+   - Click "Deploy"
+   - Your site will be live in ~2 minutes!
+
+### CI/CD Features
+
+Once connected, Vercel automatically:
+- ✅ Deploys every push to `main` branch
+- ✅ Creates preview deployments for pull requests
+- ✅ Runs builds automatically
+- ✅ Provides instant rollback capabilities
+- ✅ SSL certificates included
+
+### Manual Deployment (Alternative)
+
+If you prefer CLI deployment:
+
+```bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Deploy
+vercel
+
+# For production
+vercel --prod
+```
+
+### Environment Variables
+
+No environment variables are required for this project.
+
+### Post-Deployment
+
+After deployment, your site will be available at:
+- Production: `https://your-project-name.vercel.app`
+- Preview: `https://your-project-name-git-branch.vercel.app`
+
+You can also add a custom domain in Vercel project settings.
