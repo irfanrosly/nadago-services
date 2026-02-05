@@ -37,7 +37,7 @@ export function useServices() {
             setServices(validServices)
             setLoading(false)
           },
-          error: (error) => {
+          error: (error: any) => {
             setError(error.message)
             setLoading(false)
           },
