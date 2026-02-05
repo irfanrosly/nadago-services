@@ -8,9 +8,8 @@ import {
   GraduationCap,
   Truck,
   Sparkles,
-  Broom,
   BedDouble,
-  BriefcaseBusiness,
+  Briefcase,
   Tag,
 } from 'lucide-react'
 
@@ -19,11 +18,11 @@ const iconMap: Record<string, LucideIcon> = {
   'Food & Catering': Utensils,
   'Health & Wellness': HeartPulse,
   Education: GraduationCap,
-  Cleaning: Broom,
+  Cleaning: Sparkles,
   'Transport & Auto': Truck,
   'Events & Services': Sparkles,
   Homestay: BedDouble,
-  'Business Services': BriefcaseBusiness,
+  'Business Services': Briefcase,
 }
 
 export function getCategoryIcon(category: string): LucideIcon {
