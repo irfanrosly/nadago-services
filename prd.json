@@ -1,0 +1,61 @@
+{
+    "project_metadata": {
+      "name": "LocalServiceHub",
+      "version": "1.1.0",
+      "objective": "A community-driven directory that parses 'service-list.csv' to provide a searchable and filterable interface for local neighborhood services.",
+      "target_file": "service-list.csv"
+    },
+    "tech_stack": {
+      "frontend": "Next.js 14+ (App Router)",
+      "styling": "Tailwind CSS",
+      "icons": "Lucide-React",
+      "data_parsing": "PapaParse (client-side) or fs/csv-parse (server-side)"
+    },
+    "data_structure": {
+      "source": "/public/service-list.csv",
+      "fields": [
+        { "name": "ID", "type": "number", "description": "Unique record identifier" },
+        { "name": "Category", "type": "string", "description": "Type of service (e.g., Food, Plumbing, Health, Homestay)" },
+        { "name": "Service Provider/Name", "type": "string", "description": "The name of the business or individual provider" },
+        { "name": "Contact Number", "type": "string", "description": "Phone number(s), may include multiple entries" },
+        { "name": "Notes/Location", "type": "string", "description": "Specific neighborhood details, availability, or extra services" }
+      ]
+    },
+    "functional_requirements": {
+      "data_handling": {
+        "feature": "CSV Data Management",
+        "description": "Parse the CSV on initial load. Filter out rows where 'Service Provider/Name' is empty. Handle nulls in 'Notes/Location' gracefully by displaying 'N/A' or hiding the field."
+      },
+      "filtering_logic": {
+        "text_search": "Search across 'Service Provider/Name', 'Category', and 'Notes/Location' using a single input.",
+        "category_pills": "Dynamically generate filter buttons/pills based on unique values in the 'Category' column.",
+        "multi_select": "Allow users to select one or more categories to narrow down results."
+      },
+      "ui_components": {
+        "card_layout": "Display each service in a card showing the Category as a badge, the Name in bold, and a 'Call' button that uses the tel: link protocol.",
+        "stats_bar": "Show a count of how many services are currently visible versus the total."
+      }
+    },
+    "development_steps": [
+      {
+        "step": 1,
+        "task": "Setup Next.js project with Tailwind and upload 'service-list.csv' to the public folder."
+      },
+      {
+        "step": 2,
+        "task": "Create a 'useServices' custom hook to parse the CSV into a typed JSON array."
+      },
+      {
+        "step": 3,
+        "task": "Build the layout: A top search bar, a horizontal scrolling category list, and a responsive grid for service cards."
+      },
+      {
+        "step": 4,
+        "task": "Implement filtering logic using useMemo to ensure performance as the list grows (100+ items)."
+      }
+    ],
+    "ux_constraints": {
+      "mobile_first": "Must be highly usable on mobile for quick 'on-the-go' contact.",
+      "direct_action": "The phone number should be a clickable link for immediate dialing."
+    }
+  }
