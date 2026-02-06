@@ -17,33 +17,42 @@ export default function ServiceCard({ service }: ServiceCardProps) {
   const CategoryIcon = getCategoryIcon(consolidatedCategory)
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-5 border border-gray-200 hover:shadow-lg transition-shadow">
-      <div className="mb-3">
-        <span className="inline-flex items-center gap-2 px-3 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full">
-          <CategoryIcon className="w-4 h-4" />
-          <span>{consolidatedCategory}</span>
-        </span>
-      </div>
+    <div className="group bg-white/90 backdrop-blur-sm rounded-3xl p-6 border-2 border-[#e07a5f]/10 hover:border-[#e07a5f]/30 shadow-md hover:shadow-2xl transition-all duration-300 card-hover relative overflow-hidden flex flex-col h-full w-full">
+      {/* Decorative gradient overlay */}
+      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#e07a5f]/5 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
       
-      <h3 className="text-lg font-bold text-gray-900 mb-3">
-        {service['Service Provider/Name']}
-      </h3>
+      <div className="relative z-10 flex flex-col flex-grow">
+        <div className="mb-4">
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-br from-[#e07a5f]/10 to-[#f4a261]/10 text-[#e07a5f] text-xs font-bold rounded-2xl border border-[#e07a5f]/20 backdrop-blur-sm">
+            <CategoryIcon className="w-4 h-4" />
+            <span>{consolidatedCategory}</span>
+          </span>
+        </div>
+        
+        <h3 className="text-xl font-bold text-warm-gray mb-3 leading-tight group-hover:text-[#e07a5f] transition-colors">
+          {service['Service Provider/Name']}
+        </h3>
 
-      {notes && (
-        <p className="text-sm text-gray-600 mb-4">
-          {notes}
-        </p>
-      )}
+        <div className="flex-grow mb-5">
+          {notes ? (
+            <p className="text-sm text-warm-gray/70 leading-relaxed">
+              {notes}
+            </p>
+          ) : (
+            <div className="h-0"></div>
+          )}
+        </div>
 
-      {hasValidPhone && (
-        <a
-          href={`tel:${phoneNumber.replace(/\s+/g, '')}`}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium text-sm"
-        >
-          <Phone className="w-4 h-4" />
-          Call {phoneNumber}
-        </a>
-      )}
+        {hasValidPhone && (
+          <a
+            href={`tel:${phoneNumber.replace(/\s+/g, '')}`}
+            className="inline-flex items-center gap-2.5 px-5 py-3 bg-gradient-to-r from-[#81b29a] to-[#81b29a]/90 text-white rounded-xl hover:from-[#6fa089] hover:to-[#6fa089]/90 transition-all font-semibold text-sm shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:scale-95 mt-auto"
+          >
+            <Phone className="w-4 h-4" />
+            <span>Call {phoneNumber}</span>
+          </a>
+        )}
+      </div>
     </div>
   )
 }

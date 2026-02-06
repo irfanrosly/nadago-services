@@ -16,7 +16,8 @@ export function mapToConsolidatedCategory(originalCategory: string): string {
     category === 'Garden' ||
     category.includes('Home/Garden') ||
     category === 'Auto Gate' ||
-    category === 'Construction'
+    category === 'Construction' ||
+    category === 'Gas'
   ) {
     return 'Home Services'
   }
@@ -24,8 +25,7 @@ export function mapToConsolidatedCategory(originalCategory: string): string {
   // Food & Catering
   if (
     category === 'Food' ||
-    category.includes('Food/') ||
-    category === 'Gas'
+    category.includes('Food/') 
   ) {
     return 'Food & Catering'
   }

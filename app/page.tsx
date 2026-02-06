@@ -31,10 +31,13 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center relative z-10">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading services...</p>
+          <div className="relative">
+            <div className="animate-spin rounded-full h-16 w-16 border-4 border-[#e07a5f]/20 border-t-[#e07a5f] mx-auto mb-6"></div>
+            <div className="absolute inset-0 animate-ping rounded-full h-16 w-16 border-4 border-[#e07a5f]/10"></div>
+          </div>
+          <p className="text-warm-gray/70 font-medium">Discovering local services...</p>
         </div>
       </div>
     )
@@ -42,11 +45,11 @@ export default function Home() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center max-w-md mx-auto px-4">
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg">
-            <p className="font-semibold">Error loading services</p>
-            <p className="text-sm mt-1">{error}</p>
+      <div className="min-h-screen flex items-center justify-center relative z-10 px-4">
+        <div className="text-center max-w-md">
+          <div className="glass-effect border-2 border-[#e07a5f]/20 rounded-2xl px-6 py-5 shadow-lg">
+            <p className="font-bold text-warm-gray mb-2">Unable to load services</p>
+            <p className="text-sm text-warm-gray/70">{error}</p>
           </div>
         </div>
       </div>
@@ -73,33 +76,34 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-6 max-w-7xl">
+    <main className="min-h-screen relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 max-w-7xl">
         <script
           type="application/ld+json"
           suppressHydrationWarning
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
+        
         {/* Top panel (sticky) */}
-        <div className="sticky top-0 z-20 bg-gray-50 pb-4">
+        <div className="sticky top-0 z-30 glass-effect rounded-3xl p-6 sm:p-8 mb-8 shadow-lg border border-[#e07a5f]/10">
           {/* Header */}
-          <header className="mb-4">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <header className="mb-6 sm:mb-8">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#e07a5f] mb-3 leading-tight">
               LocalServiceHub
             </h1>
-            <p className="text-gray-600">
-              Find local neighborhood services in your area
+            <p className="text-lg sm:text-xl text-warm-gray/80 font-medium max-w-2xl">
+              Discover trusted local services in your neighborhood
             </p>
           </header>
 
           {/* Search Bar */}
-          <div className="mb-4">
+          <div className="mb-6">
             <SearchBar value={searchQuery} onChange={setSearchQuery} />
           </div>
 
           {/* Category Filters */}
           {categories.length > 0 && (
-            <div className="mb-4">
+            <div className="mb-6">
               <CategoryFilters
                 categories={categories}
                 selectedCategories={selectedCategories}
@@ -118,27 +122,41 @@ export default function Home() {
         </div>
 
         {/* Service Cards Grid */}
-        <div className="mt-6">
+        <div className="mt-8">
           {filteredServices.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredServices.map((service) => (
-                <ServiceCard key={service.ID} service={service} />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 auto-rows-fr">
+              {filteredServices.map((service, index) => (
+                <div
+                  key={service.ID}
+                  className="opacity-0 animate-fade-in-up flex"
+                  style={{
+                    animationDelay: `${Math.min(index * 50, 500)}ms`,
+                    animationFillMode: 'forwards',
+                  }}
+                >
+                  <ServiceCard service={service} />
+                </div>
               ))}
             </div>
           ) : (
-            <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">
-                No services found matching your criteria.
-              </p>
-              <button
-                onClick={() => {
-                  setSearchQuery('')
-                  setSelectedCategories([])
-                }}
-                className="mt-4 text-blue-600 hover:text-blue-800 underline"
-              >
-                Clear filters
-              </button>
+            <div className="text-center py-16 sm:py-20">
+              <div className="glass-effect rounded-2xl p-8 sm:p-12 max-w-md mx-auto border border-[#e07a5f]/20">
+                <p className="text-xl font-semibold text-warm-gray mb-3">
+                  No services found
+                </p>
+                <p className="text-warm-gray/70 mb-6">
+                  Try adjusting your search or filters
+                </p>
+                <button
+                  onClick={() => {
+                    setSearchQuery('')
+                    setSelectedCategories([])
+                  }}
+                  className="px-6 py-3 bg-[#e07a5f] text-white rounded-xl font-semibold hover:bg-[#d4694f] transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
+                >
+                  Clear filters
+                </button>
+              </div>
             </div>
           )}
         </div>
